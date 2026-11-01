@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f7f8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'"><meta name="description" content="Your private net worth timeline."><title>Worth · Your finances</title><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icon.svg"><script>(function(){let choice='system';try{choice=localStorage.getItem('worth-theme')||'system';}catch{}if(!['dark','light','system'].includes(choice))choice='system';const dark=choice==='dark'||(choice==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=dark?'dark':'light';document.documentElement.dataset.themeChoice=choice;})();</script><style>:root{color-scheme:light;--bg:#f7f7f8;--card:#fff;--category-card:#fff;--raised:#efeff1;--ink:#141416;--muted:#6b6b73;--green:#00a63c;--link:#007d2f;--border:#e2e2e6;--grid:#e5e5e8;--comparison:#aaaeb0;--crosshair:#b1b1b6;--fill-top:rgba(0,166,60,.24);--fill-bottom:rgba(0,166,60,.015);--red:#b52825;--positive-bg:#e8f5ec;--negative-bg:#fff0ef;--shadow:0 3px 15px #00000003;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-synthesis:none}
+:root[data-theme=dark]{color-scheme:dark;--bg:#09090b;--card:#1d1d1f;--category-card:#2c2c2e;--raised:#3b3b3e;--ink:#f7f7f8;--muted:#a6a6ad;--green:#00b044;--link:#56d881;--border:#3f3f42;--grid:#39393e;--comparison:#aaaeb0;--crosshair:#929298;--fill-top:rgba(0,176,68,.23);--fill-bottom:rgba(0,176,68,.02);--red:#ff625d;--positive-bg:#193224;--negative-bg:#3d2425;--shadow:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer;border:0}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,canvas:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:4px}button:disabled,select:disabled{opacity:.45;cursor:default}a{color:inherit;text-decoration:none}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.shell{width:min(1160px,100%);padding:0 40px;margin:auto}.topbar{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}.brand{display:flex;align-items:center;gap:10px;font-size:28px;font-weight:750;letter-spacing:-1.2px}.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:500;font-size:24px}.brand-dot{color:var(--green)}.top-actions{display:flex;align-items:center;gap:22px}.private-badge{font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:center}.private-badge span{font-size:8px;color:var(--green)}.theme-control{display:flex;gap:0;align-items:center;border:1px solid var(--border);background:var(--card);padding:2px;border-radius:99px}.theme-control .icon-button{border-radius:50%;width:40px;min-width:40px;height:40px}.theme-control svg{height:20px;width:20px}.theme-control #theme-system{min-height:40px;border-radius:99px;padding:0 10px 0 7px;font-size:11px;background:none;color:var(--muted)}.theme-control #theme-system[aria-pressed=true]{color:var(--link);font-weight:600}:root[data-theme=light] #theme-sun,:root[data-theme=dark] #theme-moon{display:none}.button{border-radius:12px;background:var(--ink);color:var(--card);padding:12px 18px;font-size:14px;font-weight:600;min-height:44px}.button.small{font-size:13px;padding:10px 14px}.button.small span{font-size:18px;vertical-align:-1px;margin-right:3px}.button.secondary{background:var(--raised);color:var(--ink)}.overview{display:flex;justify-content:space-between;align-items:center;padding:38px 0 26px}.eyebrow{font-size:10px;letter-spacing:1.6px;font-weight:600;color:var(--muted);margin:0 0 10px}h1{font-size:32px;letter-spacing:-1.2px;line-height:1.15;margin:0 0 9px;font-weight:650}.muted{color:var(--muted)}.scope{font-size:13px;margin:0;line-height:1.7}.icon-button{background:transparent;color:var(--muted);width:44px;min-width:44px;height:44px;font-size:23px;border-radius:50%;display:inline-grid;place-items:center;line-height:1}.icon-button:hover{background:var(--raised)}.chart-card,.spending-card{background:var(--card);border:1px solid var(--border);border-radius:26px;box-shadow:var(--shadow)}.chart-card{padding:30px 30px 0}.chart-heading{display:flex;justify-content:space-between;align-items:flex-start}.hero-value{font-size:54px;letter-spacing:-2.7px;line-height:1.12;font-weight:550;font-variant-numeric:tabular-nums}.hero-value .cents{font-size:.56em;letter-spacing:-1px;color:var(--muted)}.change-row{display:flex;align-items:center;gap:8px;margin-top:13px;font-size:12px;flex-wrap:wrap}.change{color:var(--link);background:var(--positive-bg);border-radius:7px;padding:5px 7px;font-size:11px;font-weight:600}.change.negative{color:var(--red);background:var(--negative-bg)}.asof{color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;padding-top:7px}.status-dot{display:inline-block;height:6px;width:6px;border-radius:50%;background:var(--green);margin-right:3px}.chart-controls{display:flex;align-items:center;justify-content:space-between;margin-top:26px;margin-bottom:12px}.segments{display:flex;gap:3px;padding:4px;background:var(--raised);border-radius:12px}.segments button{background:transparent;color:var(--muted);border-radius:8px;min-width:48px;height:36px;font-size:12px;font-weight:600}.segments button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 4px #00000015}.zoom-controls{display:flex;align-items:center;gap:2px}.zoom-controls .icon-button{font-size:20px}.latest-button{padding:10px;background:transparent;color:var(--link);font-size:11px;font-weight:600;min-height:44px}.latest-button span{margin-left:4px}.plot-wrap{position:relative;height:350px}canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}.chart-tooltip{position:absolute;pointer-events:none;background:var(--ink);color:var(--card);padding:11px 13px;border-radius:12px;box-shadow:0 5px 20px #0002;min-width:143px;z-index:3;transform:translateX(-50%)}.chart-tooltip span{display:block;font-size:10px;opacity:.75;margin-bottom:4px}.chart-tooltip strong{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;display:block}.chart-tooltip small{font-size:9px;opacity:.75;display:block;margin-top:5px}.gesture-label{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:10px;background:var(--card);border:1px solid var(--border);padding:6px 10px;border-radius:16px;pointer-events:none}.chart-error{position:absolute;inset:0;display:grid;place-content:center;background:var(--card);text-align:center;color:var(--red);font-size:13px;padding:30px}.range-summary{display:flex;align-items:center;gap:12px;justify-content:space-between;color:var(--muted);font-size:10px;padding:7px 0 20px;min-height:44px}.range-summary #points-label{margin-left:auto}.text-button{color:var(--link);padding:0;background:none;text-align:left;font-size:12px;min-height:40px;font-weight:550}.text-button span{font-size:14px;margin-left:4px}.gesture-guide{border-top:1px solid var(--border);display:flex;gap:26px;padding:16px 0 18px;font-size:10px;color:var(--muted)}.gesture-guide b{font-size:14px;margin-right:5px;font-weight:400}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);padding:28px 0 34px;gap:20px}.stats-grid article{padding:4px 22px;border-right:1px solid var(--border)}.stats-grid article:first-child{padding-left:0}.stats-grid article:last-child{border:0}.stats-grid strong{font-size:24px;letter-spacing:-.8px;font-weight:550;display:block;margin:6px 0;font-variant-numeric:tabular-nums}.stats-grid span{display:block;font-size:11px}.spending-section{padding:10px 0 30px}.section-heading{display:flex;justify-content:space-between;align-items:center;margin:0 0 24px}.section-heading h2{font-size:30px;letter-spacing:-1px;font-weight:600;margin:0}.section-heading>span{font-size:11px}.spending-grid{display:grid;grid-template-columns:1fr 1.07fr;gap:20px;align-items:start}.spending-card{padding:27px 28px 20px;min-width:0}.category-card{background:var(--category-card)}.spend-card-title{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:28px}.spend-card-title h3{font-size:18px;font-weight:550;letter-spacing:-.3px;margin:0}.spend-card-title>strong{font-size:20px;font-weight:550;font-variant-numeric:tabular-nums}.month-field{margin:18px 0 24px;padding-bottom:23px;border-bottom:1px solid var(--border)}.month-select{color:var(--ink);background:transparent;border:0;font-size:18px;font-weight:450;letter-spacing:-.25px;min-height:44px;max-width:100%;padding:0 23px 0 0;appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='8' viewBox='0 0 13 8'%3E%3Cpath d='m1 1 5.5 5.5L12 1' fill='none' stroke='%23888888' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 5px center}.month-select option{color:var(--ink);background:var(--card)}.category-strip{height:46px;display:flex;gap:3px;border-radius:10px;overflow:hidden;margin:8px 0 20px}.category-segment{min-width:2px;border-radius:3px;flex-shrink:1}.category-row{display:flex;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid var(--border);min-height:88px}.category-row:last-child{border:0}.category-icon{width:43px;height:43px;border-radius:50%;background:var(--raised);display:grid;place-items:center;flex-shrink:0;color:var(--ink)}.category-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.category-main{min-width:0;flex:1}.category-line{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 9px}.category-name{font-size:16px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.category-amount{font-size:16px;font-variant-numeric:tabular-nums;font-weight:450;white-space:nowrap}.category-track{height:4px;border-radius:4px;background:var(--raised);overflow:hidden}.category-fill{height:100%;border-radius:4px;min-width:2px}.show-categories{display:flex;align-items:center;justify-content:center;gap:9px;margin:12px 0 0;min-height:44px;border-radius:99px;background:var(--raised);color:var(--ink);width:100%;font-size:14px}.show-categories span{font-size:19px;line-height:1}.spend-footnote{font-size:11px;line-height:1.7;color:var(--muted);margin:18px 0 0}.comparison-readouts{border-top:1px solid var(--border);margin:24px 0 14px;padding-top:17px;display:grid;gap:12px}.comparison-row{display:flex;align-items:center;gap:12px;min-height:68px}.legend-mark{width:4px;height:47px;border-radius:5px;background:var(--green);flex-shrink:0}.baseline .legend-mark{background:var(--comparison)}.comparison-row .month-select{font-size:18px;min-width:0;flex:1;width:100px}.comparison-numbers{text-align:right;display:grid;gap:5px;min-width:95px}.comparison-row strong{font-weight:450;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}.comparison-row>strong{margin-left:auto}.comparison-numbers>span{color:var(--red);font-size:16px;font-variant-numeric:tabular-nums}.comparison-numbers>span.under{color:var(--link)}.spend-plot-wrap{height:320px;margin:12px -5px 0}.spend-plot-wrap canvas{touch-action:pan-y}.spend-chart-caption{display:flex;justify-content:space-between;font-size:10px;line-height:1.7;color:var(--muted);gap:10px;margin-top:6px}.comparison-card .spend-footnote{padding-top:14px;border-top:1px solid var(--border)}.spending-method{font-size:12px;color:var(--muted);line-height:1.8;padding:20px 2px 0}.spending-method summary{cursor:pointer;font-size:12px;color:var(--ink);width:fit-content}.spending-method p{max-width:800px;margin:12px 0}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info-card{border:1px solid var(--border);border-radius:20px;padding:21px 23px;font-size:12px;color:var(--muted);line-height:1.75;background:var(--card)}.info-card summary{cursor:pointer;color:var(--ink);font-weight:550;list-style:none;display:flex;justify-content:space-between}.info-card summary::-webkit-details-marker{display:none}.info-card p{margin:12px 0 0}.data-card{display:flex;flex-direction:column;gap:12px}.data-card .eyebrow{font-size:9px;margin-bottom:0}.data-card p{margin:0}.data-actions{display:flex;gap:30px}.data-card #save-status{font-size:10px}footer{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;padding:30px 0 38px;gap:12px}dialog{border:1px solid var(--border);border-radius:24px;width:min(600px,calc(100% - 28px));padding:0;box-shadow:0 30px 100px #0003;color:var(--ink);max-height:90dvh;background:var(--card)}dialog::backdrop{background:#0008;backdrop-filter:blur(5px)}.dialog-head{padding:25px 25px 18px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border)}.dialog-head h2{font-size:23px;letter-spacing:-.7px;margin:0;font-weight:600}.dialog-head .eyebrow{font-size:9px;margin-bottom:7px}.dialog-body{padding:20px 25px;overflow:auto;max-height:65dvh}.dialog-body p{font-size:13px;line-height:1.7;color:var(--muted);margin:15px 0}.import-tabs{display:flex;gap:3px;background:var(--raised);padding:4px;border-radius:11px}.import-tabs button{font-size:11px;background:none;color:var(--muted);flex:1;border-radius:8px;min-height:40px;white-space:nowrap;padding:4px 5px}.import-tabs button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 4px #0001}input,textarea{width:100%;border:1px solid var(--border);background:var(--bg);color:var(--ink);padding:12px;border-radius:10px;font-size:16px;min-height:44px}textarea{resize:vertical;font-family:ui-monospace,monospace;font-size:12px;line-height:1.6}.field-label,.form-grid label{display:block;font-size:11px;color:var(--muted);margin:14px 0 7px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-grid input{margin-top:8px}.file-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 8px}.file-row input{position:absolute;width:1px;height:1px;opacity:0;min-height:0}.file-button{font-size:11px;color:var(--link);border:1px dashed var(--border);border-radius:9px;padding:12px;cursor:pointer}.file-row .text-button{font-size:10px}small.muted{font-size:10px}.dialog-foot{padding:16px 25px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}.feedback{padding:12px;border-radius:10px;background:var(--positive-bg);font-size:12px;line-height:1.6;margin:16px 0}.feedback.error{color:var(--red);background:var(--negative-bg)}.table-wrap{max-height:300px;overflow:auto;border:1px solid var(--border);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:11px;font-variant-numeric:tabular-nums}th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{background:var(--raised);color:var(--muted);font-weight:500;position:sticky;top:0}tr:last-child td{border:0}.checkbox-label{display:flex;align-items:center;gap:9px;font-size:11px;margin:15px 0;color:var(--ink)}.checkbox-label input{width:17px;min-height:17px}h3{font-size:14px;margin:22px 0 0}blockquote{font-size:13px;line-height:1.8;background:var(--raised);padding:15px;margin:15px 0;border-left:3px solid var(--green);border-radius:4px}.technical-details{margin-top:22px;font-size:12px}.technical-details summary{cursor:pointer}code{font-size:11px;background:var(--raised);padding:2px 4px;border-radius:3px}pre{white-space:pre-wrap;word-break:break-word;font-size:10px;line-height:1.7;background:var(--raised);padding:12px;border-radius:10px}#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);max-width:90vw;z-index:10;background:var(--ink);color:var(--card);padding:12px 20px;border-radius:12px;font-size:12px;box-shadow:0 4px 20px #0003}
+@media(max-width:850px){.spending-grid{grid-template-columns:1fr}.spending-card{padding:26px 28px 20px}.spend-plot-wrap{height:330px}.category-row{min-height:85px}.category-name,.category-amount{font-size:18px}.category-strip{height:48px}.comparison-row .month-select{font-size:21px}.comparison-row strong{font-size:23px}.comparison-numbers>span{font-size:19px}}
+@media(max-width:650px){.shell{padding:0 16px}.topbar{height:86px}.brand{font-size:25px;gap:7px}.brand-mark{width:29px;height:29px;border-radius:9px;font-size:21px}.top-actions{gap:10px}.private-badge{display:none}.theme-control .icon-button{width:38px;min-width:38px;height:38px}.theme-control #theme-system{min-height:38px;padding:0 8px 0 3px;font-size:10px}.button.small{font-size:11px;padding:9px 11px;min-height:44px}.overview{padding:27px 2px 20px}h1{font-size:28px}.eyebrow{font-size:9px;letter-spacing:1.5px}.scope{font-size:11px;max-width:260px;line-height:1.7}.chart-card{padding:25px 18px 0;border-radius:24px}.hero-value{font-size:43px;letter-spacing:-2px}.asof{font-size:9px;max-width:82px;line-height:1.6;align-items:flex-start;gap:5px}.asof .status-dot{margin-top:4px;flex-shrink:0}.change-row{gap:6px;font-size:10px;margin-top:10px}.change{font-size:10px}.chart-controls{margin-top:23px;gap:8px}.segments{gap:2px;padding:3px;border-radius:10px}.segments button{min-width:36px;height:35px;font-size:11px}.zoom-controls .icon-button{width:30px;min-width:30px}.latest-button{font-size:10px;padding:6px}.plot-wrap{height:300px;margin-left:-5px;margin-right:-6px}.gesture-guide{gap:8px;flex-wrap:wrap;font-size:9px;line-height:1.8;padding:13px 0;justify-content:space-between}.gesture-guide b{font-size:12px;margin-right:2px}.range-summary{font-size:9px;gap:7px;padding-bottom:14px}.range-summary .text-button{font-size:9px}.stats-grid{gap:9px;padding:24px 2px}.stats-grid article{padding:3px 10px}.stats-grid .eyebrow{font-size:7px;letter-spacing:1px;line-height:1.8;min-height:22px;margin-bottom:4px}.stats-grid strong{font-size:18px;letter-spacing:-.6px}.stats-grid span{font-size:9px;line-height:1.7}.spending-section{padding:18px 0 24px}.section-heading{margin:0 2px 20px}.section-heading h2{font-size:28px}.section-heading>span{font-size:10px;max-width:135px;text-align:right;line-height:1.6}.spending-grid{gap:18px}.spending-card{border-radius:24px;padding:25px 23px 19px}.spend-card-title h3{font-size:17px}.spend-card-title>strong{font-size:19px}.month-field{padding-bottom:18px;margin:13px 0 25px}.month-select{font-size:20px}.category-strip{height:42px;margin-bottom:16px}.category-row{gap:15px;padding:19px 0;min-height:85px}.category-icon{width:42px;height:42px}.category-icon svg{width:23px;height:23px}.category-name{font-size:16px}.category-amount{font-size:17px}.category-line{gap:6px;margin-bottom:10px}.category-track{height:4px}.show-categories{font-size:14px;min-height:44px}.spend-footnote{font-size:10px}.comparison-readouts{margin-top:22px;gap:8px;padding-top:15px}.comparison-row{gap:11px;min-height:68px}.comparison-row .month-select{font-size:18px;padding-right:19px;background-position:right 2px center}.comparison-row strong{font-size:20px}.comparison-numbers{min-width:95px}.comparison-numbers>span{font-size:17px}.legend-mark{height:44px}.spend-plot-wrap{height:290px;margin-left:-6px;margin-right:-9px;margin-top:8px}.spend-chart-caption{font-size:9px}.spending-method{font-size:11px;padding:19px 3px 0}.bottom-grid{grid-template-columns:1fr;gap:12px}.info-card{padding:18px;font-size:11px;border-radius:20px}.data-card{gap:10px}.data-card p br{display:none}.data-actions{gap:25px}.data-actions .text-button{font-size:11px}footer{font-size:9px;padding:25px 1px max(27px,env(safe-area-inset-bottom));line-height:1.7}footer>span:last-child{text-align:right}.dialog-head{padding:22px 20px 17px}.dialog-body{padding:18px 20px}.dialog-foot{padding:14px 20px}.dialog-foot .button{font-size:12px}.dialog-head h2{font-size:22px}.form-grid{grid-template-columns:1fr}.form-grid label{margin:7px 0}dialog{max-height:92dvh}.dialog-body{max-height:66dvh}.plot-wrap .chart-tooltip{min-width:133px}.chart-tooltip strong{font-size:15px}.import-tabs{gap:2px}.import-tabs button{font-size:10px;padding:5px 3px}textarea{font-size:16px}}
+@media(max-width:370px){.shell{padding:0 12px}.brand{font-size:23px}.brand-mark{display:none}.top-actions{gap:8px}.spending-card{padding-left:19px;padding-right:19px}.category-name{font-size:15px}.category-amount{font-size:15px}.comparison-row .month-select{font-size:16px}.comparison-row strong{font-size:18px}.comparison-numbers>span{font-size:15px}.segments button{min-width:32px}.latest-button{padding:4px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .15s,opacity .15s}dialog[open]{animation:enter .15s ease-out}@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.setup-card{margin:28px 0 0;padding:30px;border-radius:24px;border:1px solid var(--border);background:var(--card)}.setup-card h2{font-size:28px;font-weight:550;letter-spacing:-1px;margin:0 0 12px}.setup-card p{color:var(--muted);font-size:14px;max-width:570px;line-height:1.8}.setup-actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.setup-card small{display:block;font-size:11px;line-height:1.8;color:var(--muted);max-width:600px}@media(max-width:650px){.setup-card{padding:24px}.setup-card h2{font-size:25px}.setup-actions{gap:9px}.setup-actions .button{font-size:12px}.setup-card p{font-size:13px}}
+</style></head>
+<body><main class="shell">
+  <header class="topbar"><a class="brand" href="./" aria-label="Net worth home"><span class="brand-mark" aria-hidden="true">↗</span><span>worth<span class="brand-dot">.</span></span></a><div class="top-actions"><div class="theme-control" role="group" aria-label="Appearance"><button id="theme-toggle" class="icon-button" aria-label="Switch to dark mode" title="Switch appearance"><svg id="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 14a8.5 8.5 0 0 1-10.5-10.5A8.5 8.5 0 1 0 20.5 14Z"/></svg><svg id="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="theme-system" title="Follow your device appearance" aria-label="Use device appearance" aria-pressed="true">Auto</button></div><span class="private-badge"><span aria-hidden="true">●</span> On this device</span><button id="open-import" class="button small" aria-haspopup="dialog"><span aria-hidden="true">+</span> Add data</button></div></header>
+  <section id="setup-card" class="setup-card" hidden><p class="eyebrow">INDEPENDENT. PERSONAL. YOURS.</p><h2>Your history belongs here.</h2><p>Import your private Worth backup to restore both charts. Records stay in this browser; they are never uploaded to the website.</p><div class="setup-actions"><button class="button" data-open-backup>Import full backup</button><button id="start-manual" class="button secondary">Enter a snapshot</button></div><small>Each device has its own records. Keep a backup in Files before clearing Safari data or changing devices.</small></section>
+  <section id="net-worth" class="overview" aria-labelledby="page-title"><div><p class="eyebrow">YOUR FINANCIAL PICTURE</p><h1 id="page-title">Net worth</h1><p class="muted scope">Cash & savings, less credit cards. Retirement excluded.</p></div><button id="refresh" class="icon-button" aria-label="Refresh saved data" title="Refresh saved data">↻</button></section>
+  <section class="chart-card" aria-label="Interactive net worth timeline">
+    <div class="chart-heading"><div><p id="value-label" class="eyebrow">LATEST RECORDED</p><div id="hero-value" class="hero-value">—</div><div class="change-row"><span id="change" class="change">Loading history…</span><span id="change-period" class="muted"></span></div></div><div class="asof"><span class="status-dot"></span><span id="asof">Connecting…</span></div></div>
+    <div class="chart-controls"><div class="segments" aria-label="Timeline length"><button data-range="1W" aria-pressed="false">1W</button><button data-range="1M" aria-pressed="false">1M</button><button data-range="1Y" aria-pressed="false">1Y</button><button data-range="ALL" aria-pressed="true" class="active">All</button></div><div class="zoom-controls"><button id="zoom-out" class="icon-button" aria-label="Zoom out">−</button><button id="zoom-in" class="icon-button" aria-label="Zoom in">+</button><button id="latest" class="latest-button" title="Move timeline to latest">Latest <span aria-hidden="true">→</span></button></div></div>
+    <div class="plot-wrap"><canvas id="chart" tabindex="0" role="img" aria-label="Net worth over time. Pinch to zoom. Drag below the line to pan, or on and above it to inspect. Use arrow keys to pan and plus or minus to zoom."></canvas><div id="chart-tooltip" class="chart-tooltip" hidden><span id="tooltip-date"></span><strong id="tooltip-value"></strong><small>Recorded daily snapshot</small></div><div id="gesture-label" class="gesture-label" hidden></div><div id="chart-error" class="chart-error" hidden></div></div>
+    <div class="range-summary"><span id="range-caption">Loading dates…</span><button id="clear-selection" class="text-button" hidden>Clear selection</button><span id="points-label"></span></div>
+    <div class="gesture-guide"><span><b aria-hidden="true">↔</b> Drag below the line to move</span><span><b aria-hidden="true">⌖</b> Drag on or above to inspect</span><span><b aria-hidden="true">⤢</b> Pinch to zoom</span></div>
+  </section>
+  <section class="stats-grid" aria-label="History summary"><article><p class="eyebrow">SINCE THE BEGINNING</p><strong id="total-growth">—</strong><span id="growth-caption" class="muted">—</span></article><article><p class="eyebrow">HIGHEST RECORDED</p><strong id="peak-value">—</strong><span id="peak-date" class="muted">—</span></article><article><p class="eyebrow">HISTORY STARTS</p><strong id="first-date">—</strong><span id="history-count" class="muted">—</span></article></section>
+  <section id="spending" class="spending-section" aria-labelledby="spending-title">
+    <div class="section-heading"><div><p class="eyebrow">WHERE YOUR MONEY GOES</p><h2 id="spending-title">Spending</h2></div><span id="spending-asof" class="muted">Loading spending…</span></div>
+    <div id="spending-error" class="feedback error" role="status" hidden></div>
+    <div class="spending-grid">
+      <article class="spending-card category-card" aria-labelledby="category-title">
+        <div class="spend-card-title"><h3 id="category-title">By category</h3><strong id="spending-total">—</strong></div>
+        <div class="month-field"><label class="sr-only" for="category-month">Spending month</label><select id="category-month" class="month-select" disabled><option>Loading…</option></select></div>
+        <div id="category-strip" class="category-strip" role="img" aria-label="Spending by category"></div>
+        <div id="category-list" class="category-list"></div>
+        <button id="show-categories" class="show-categories" aria-expanded="false" hidden>Show all categories <span aria-hidden="true">⌄</span></button>
+        <p id="category-footnote" class="spend-footnote"></p>
+      </article>
+      <article class="spending-card comparison-card" aria-labelledby="comparison-title">
+        <div class="spend-card-title"><h3 id="comparison-title">Spending over time</h3><button id="clear-spending" class="text-button" hidden>Clear</button></div>
+        <div class="comparison-readouts">
+          <div class="comparison-row current"><span class="legend-mark"></span><label class="sr-only" for="spend-month">Chart month</label><select id="spend-month" class="month-select" disabled><option>Loading…</option></select><div class="comparison-numbers"><strong id="spend-current">—</strong><span id="spend-delta"></span></div></div>
+          <div class="comparison-row baseline"><span class="legend-mark"></span><label class="sr-only" for="spend-baseline">Compare spending with</label><select id="spend-baseline" class="month-select" disabled><option>Average month</option></select><strong id="spend-previous">—</strong></div>
+        </div>
+        <div class="spend-plot-wrap"><canvas id="spend-chart" tabindex="0" role="img" aria-label="Daily cumulative spending comparison. Drag to inspect or use arrow keys."></canvas></div>
+        <div class="spend-chart-caption"><span id="spend-date">—</span><span>Drag to inspect</span></div>
+        <p id="baseline-note" class="spend-footnote"></p>
+      </article>
+    </div>
+    <details class="spending-method"><summary>About these spending numbers</summary><p>Net posted spending from your connected accounts. Account transfers and card payments are excluded; refunds reduce spending on their posted date. Pending transactions are excluded. Categories follow your financial feed.</p><p>Confirmed cash expenses can be recorded as separate adjustments. The app adds each adjustment once, using its unique ID, without changing the original bank-feed totals.</p><p id="spending-coverage"></p><p>New data appears after you import records. This app does not connect to banks or upload records. It runs entirely in your browser, served by GitHub Pages.</p></details>
+  </section>
+  <section class="bottom-grid"><details class="info-card"><summary>What’s included <span aria-hidden="true">↗</span></summary><p>Cash and savings, minus credit cards. Retirement, vehicles, physical cash, and unconnected accounts are outside the net-worth chart. Keep the same scope for every imported snapshot.</p><p>This is the recorded balance history. A transfer may reach one account before leaving another, so short-lived spikes can reflect reporting timing. There is no reliable intraday history: the cursor snaps to a recorded date instead of estimating values.</p><p id="earliest-note"></p></details><div class="info-card data-card"><div><p class="eyebrow">YOUR DATA, READY TO GROW</p><p>New snapshots fit into the same timeline.<br>Keep a backup in Files to move between devices.</p></div><div class="data-actions"><button id="export-json" class="text-button">Export backup <span aria-hidden="true">↗</span></button><button id="open-records" class="text-button">View records <span aria-hidden="true">↗</span></button></div><span id="save-status" class="muted"></span></div></section>
+  <footer><span><span class="status-dot"></span> On this device · Your private ledger</span><span>Retirement excluded · USD</span></footer>
+</main>
+<dialog id="import-dialog"><div class="dialog-head"><div><p class="eyebrow">KEEP YOUR TIMELINE CURRENT</p><h2>Add financial data</h2></div><button class="icon-button" data-close="import-dialog" aria-label="Close data panel">×</button></div><div class="dialog-body"><div class="import-tabs"><button data-tab="paste" class="active" aria-pressed="true">Paste / upload</button><button data-tab="spending" aria-pressed="false">Spending</button><button data-tab="manual" aria-pressed="false">One snapshot</button><button data-tab="connect" aria-pressed="false">Backup</button></div>
+ <section id="tab-paste" class="tab-panel"><p>Paste JSON or CSV, or choose a file. Matching dates are merged; your older history stays intact.</p><label class="field-label" for="import-text">Data</label><textarea id="import-text" rows="6" spellcheck="false" placeholder='{"points":[{"date":"2026-11-01","netWorth":78000.00}]}'></textarea><div class="file-row"><label class="file-button" for="import-file">Choose JSON or CSV</label><input type="file" id="import-file" accept=".json,.csv,application/json,text/csv"><button id="example" class="text-button">Use format example</button></div><small class="muted">CSV columns: date,netWorth. Finances net-worth chart JSON also works.</small></section>
+ <section id="tab-spending" class="tab-panel" hidden><p>Paste a spending export or the paired category and comparison feeds from Finances. Months are merged; earlier records and confirmed cash corrections stay intact.</p><label class="field-label" for="spending-import-text">Spending JSON</label><textarea id="spending-import-text" rows="7" spellcheck="false" placeholder='{"type":"spending","asOf":"2026-11-01","months":[…]}'></textarea><div class="file-row"><label class="file-button" for="spending-import-file">Choose JSON</label><input type="file" id="spending-import-file" accept=".json,application/json"><button id="export-spending" class="text-button">Export spending backup ↗</button></div><small class="muted">Use the export as a format reference, or import new monthly records here.</small></section>
+ <section id="tab-manual" class="tab-panel" hidden><p>Enter your total cash and savings minus card balances for one date. Leave retirement out.</p><div class="form-grid"><label>Date<input id="manual-date" type="date" required></label><label>Net worth (USD)<input id="manual-value" type="number" step="0.01" inputmode="decimal" placeholder="78000.00"></label></div><label class="field-label" for="manual-note">Note (optional)</label><input id="manual-note" maxlength="500" placeholder="Updated connected account balances"></section>
+ <section id="tab-connect" class="tab-panel" hidden><p>Save both charts and all cash corrections in one portable backup. Import it on another device to keep the same history.</p><div class="setup-actions"><button class="button" data-open-backup>Import full backup</button><button id="backup-dialog-export" class="button secondary">Export full backup</button></div><p>Records are stored only in this browser. Clearing website data, private browsing, or device loss can remove them. Keep a downloaded backup in Files. The app has no account, bank connection, or automatic cross-device sync.</p><button id="request-persistence" class="text-button">Ask browser to retain local records</button><p id="persistence-status" role="status"></p></section>
+ <div id="import-feedback" role="status" class="feedback" hidden></div><div id="import-preview" hidden><h3>Review changes</h3><p id="preview-summary"></p><div id="preview-table" class="table-wrap"></div><label id="revision-label" class="checkbox-label" hidden><input id="allow-revisions" type="checkbox"> Allow these revisions to existing records</label></div>
+ </div><div class="dialog-foot"><button class="button secondary" data-close="import-dialog">Close</button><button id="preview-import" class="button">Preview import</button><button id="save-import" class="button" hidden>Save data</button></div></dialog>
+<dialog id="records-dialog"><div class="dialog-head"><div><p class="eyebrow">DAILY BALANCE HISTORY</p><h2>Your records</h2></div><button class="icon-button" data-close="records-dialog" aria-label="Close records">×</button></div><div class="dialog-body"><p class="muted">Latest dates first. These are daily snapshots, not transactions.</p><div id="records-table" class="table-wrap"></div></div><div class="dialog-foot"><button id="export-csv" class="button secondary">Export CSV</button><button class="button" data-close="records-dialog">Done</button></div></dialog>
+<input type="file" id="restore-file" accept=".json,application/json" hidden>
+<dialog id="restore-dialog"><div class="dialog-head"><div><p class="eyebrow">BRING YOUR HISTORY</p><h2>Restore a full backup</h2></div><button class="icon-button" data-close="restore-dialog" aria-label="Close backup preview">×</button></div><div class="dialog-body"><p id="restore-summary"></p><p>Records missing from this backup stay intact. Changed existing records need your confirmation.</p><label id="restore-revision-label" class="checkbox-label" hidden><input id="restore-revisions" type="checkbox">Allow revisions to existing records</label><div id="restore-feedback" class="feedback" role="status" hidden></div></div><div class="dialog-foot"><button class="button secondary" data-close="restore-dialog">Cancel</button><button id="restore-confirm" class="button">Restore backup</button></div></dialog>
+<div id="toast" role="status" hidden></div><script type="module">const DAY = 86400000;
+function dateToTime(date) {
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error('Use dates in YYYY-MM-DD format.');
+  const t = Date.parse(date + 'T00:00:00Z');
+  if (!Number.isFinite(t) || new Date(t).toISOString().slice(0,10) !== date) throw new Error('Invalid calendar date: ' + date);
+  return t;
+}
+function normalizePoints(payload) {
+  const input = Array.isArray(payload) ? payload : payload?.points ?? payload?.chart_points ?? payload?.data?.interval_views?.MAX?.chart_points ?? payload?.interval_views?.MAX?.chart_points;
+  if (!Array.isArray(input) || !input.length) throw new Error('Add at least one point with date and netWorth.');
+  if (input.length > 50000) throw new Error('Import at most 50,000 daily points at a time.');
+  const byDate = new Map();
+  for (const p of input) {
+    const date = p.date;
+    dateToTime(date);
+    const value = p.netWorth ?? p.net_worth;
+    if (typeof value !== 'number' || !Number.isFinite(value) || Math.abs(value) > 1e12) throw new Error('netWorth must be a finite dollar number for ' + date);
+    const point = {date, netWorth: Math.round(value * 100) / 100, source: String(p.source || payload?.source || 'import').slice(0,120)};
+    if (p.note) point.note = String(p.note).slice(0,500);
+    if (byDate.has(date) && byDate.get(date).netWorth !== point.netWorth) throw new Error('Conflicting values for ' + date + ' in the same import.');
+    byDate.set(date,point);
+  }
+  return [...byDate.values()].sort((a,b)=>a.date.localeCompare(b.date));
+}
+function previewMerge(current, incoming) {
+  const existing = new Map(current.map(p=>[p.date,p]));
+  const result = {added:0,revised:0,unchanged:0,changes:[]};
+  for (const p of incoming) {
+    const old=existing.get(p.date);
+    if (!old) {result.added++;result.changes.push({date:p.date,before:null,after:p.netWorth});}
+    else if (old.netWorth !== p.netWorth) {result.revised++;result.changes.push({date:p.date,before:old.netWorth,after:p.netWorth});}
+    else result.unchanged++;
+  }
+  return result;
+}
+function mergePoints(current, incoming) {
+  const map=new Map(current.map(p=>[p.date,p]));
+  for(const p of incoming) {if(map.get(p.date)?.netWorth !== p.netWorth) map.set(p.date,p);}
+  return [...map.values()].sort((a,b)=>a.date.localeCompare(b.date));
+}
+function clampWindow(start,end,min,max) {
+  const whole=Math.max(0,max-min);
+  const span=Math.min(Math.max(end-start,Math.min(2*DAY,whole)),whole);
+  const lo=Math.max(min,Math.min(start,max-span));
+  return [lo,lo+span];
+}
+function nearestPoint(points,time) {
+  if(!points.length) return null;
+  let lo=0,hi=points.length-1;
+  while(lo<hi){const m=Math.floor((lo+hi)/2);if(dateToTime(points[m].date)<time)lo=m+1;else hi=m;}
+  if(lo===0)return points[0];
+  return Math.abs(dateToTime(points[lo].date)-time)<Math.abs(dateToTime(points[lo-1].date)-time)?points[lo]:points[lo-1];
+}
+// Used only to distinguish touch regions along the drawn line. Displayed dollar
+// values always come from nearestPoint; this never creates a historical record.
+function lineHitValue(points,time) {
+  if(!points.length)return 0;
+  if(time<=dateToTime(points[0].date))return points[0].netWorth;
+  for(let i=1;i<points.length;i++){
+    const end=dateToTime(points[i].date);
+    if(time<=end){const start=dateToTime(points[i-1].date),ratio=(time-start)/(end-start);return points[i-1].netWorth+(points[i].netWorth-points[i-1].netWorth)*ratio;}
+  }
+  return points.at(-1).netWorth;
+}
+
+// Shared by the browser, private API, and update tools. Dollars are rounded once.
+const cents = v => Math.round((v + Number.EPSILON) * 100) / 100;
+function monthDays(month){dateToTime(month+'-01');return new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7)),0)).getUTCDate();}
+function amount(v){if(typeof v!=='number'||!Number.isFinite(v)||Math.abs(v)>1e12)throw new Error('Spending needs finite dollar amounts.');return cents(v);}
+function cleanText(v,max=150){return String(v||'').slice(0,max);}
+function previousMonth(month,n=1){const d=new Date(dateToTime(month+'-01'));d.setUTCMonth(d.getUTCMonth()-n);return d.toISOString().slice(0,7);}
+function normalizeSpending(payload){
+  if(payload?.categoryData&&payload?.comparisonData)return normalizeSpending(fromSpendingWidgets(payload));
+  if(!Array.isArray(payload?.months)||!payload.months.length||payload.months.length>600)throw new Error('Spending JSON needs 1–600 monthly records.');
+  const seen=new Set();
+  const months=payload.months.map(m=>{
+    if(!/^\d{4}-\d{2}$/.test(m.month||''))throw new Error('Use YYYY-MM for a spending month.');
+    const days=monthDays(m.month);if(seen.has(m.month))throw new Error('Duplicate spending month: '+m.month);seen.add(m.month);
+    const daysElapsed=m.daysElapsed??days;
+    if(!Number.isInteger(daysElapsed)||daysElapsed<0||daysElapsed>days)throw new Error('Invalid elapsed days for '+m.month);
+    if(!Array.isArray(m.categories)||m.categories.length>100)throw new Error('Each month needs a categories array.');
+    const keys=new Set(),categories=m.categories.map(c=>{
+      if(!/^[a-z0-9_-]{1,60}$/.test(c.key||'')||keys.has(c.key))throw new Error('Category keys must be unique simple names.');keys.add(c.key);
+      return{key:c.key,label:cleanText(c.label||c.key,80),amount:amount(c.amount)};
+    }).sort((a,b)=>b.amount-a.amount||a.key.localeCompare(b.key));
+    const total=amount(m.total);
+    if(Math.abs(cents(categories.reduce((s,c)=>s+c.amount,0))-total)>.02)throw new Error('Category totals do not match '+m.month+'.');
+    if(!Array.isArray(m.daily)||m.daily.length!==daysElapsed+1)throw new Error('Include day 0 through each elapsed day for '+m.month+'.');
+    const daily=m.daily.map((p,i)=>{if(p.day!==i)throw new Error('Daily spending must be consecutive from day 0.');return{day:i,total:amount(p.total)};});
+    if(daily[0].total!==0||Math.abs(daily.at(-1).total-total)>.01)throw new Error('Daily spending must start at zero and finish at the monthly total.');
+    return{month:m.month,daysElapsed,total,categories,daily};
+  }).sort((a,b)=>b.month.localeCompare(a.month));
+  let asOf=payload.asOf||months[0].month+'-'+String(Math.max(1,months[0].daysElapsed)).padStart(2,'0');dateToTime(asOf);
+  const adjustments=(payload.adjustments||[]).map(a=>({id:cleanText(a.id,100),date:a.date,amount:amount(a.amount),key:cleanText(a.key,60),label:cleanText(a.label,80),note:cleanText(a.note,500)}));
+  const ids=new Set();for(const a of adjustments){dateToTime(a.date);if(!a.id||ids.has(a.id)||!/^[a-z0-9_-]{1,60}$/.test(a.key))throw new Error('Cash adjustments need unique IDs and category keys.');ids.add(a.id);}
+  return{schemaVersion:1,type:'spending',currency:'USD',asOf,source:cleanText(payload.source||'connected-accounts'),months,adjustments};
+}
+function fromSpendingWidgets(payload){
+  const unwrap=v=>v?.data||v,category=unwrap(payload.categoryData),comparison=unwrap(payload.comparisonData);
+  if(!category?.month_views||!comparison?.month_views)throw new Error('Include both category and comparison month views.');
+  const months=comparison.month_views.map(m=>{
+    const c=category.month_views.find(c=>c.month_start===m.month_start);if(!c)throw new Error('Missing categories for '+m.month_start);
+    const month=m.month_start.slice(0,7),elapsed=Math.min(m.days_elapsed,monthDays(month));
+    return{month,daysElapsed:elapsed,total:m.total_spend,categories:c.categories.map(c=>({key:c.primary_category_key,label:c.primary_category,amount:c.amount_value})),daily:m.points.filter(p=>p.day<=elapsed).map(p=>({day:p.day,total:p.cumulative_spend}))};
+  });
+  return{type:'spending',asOf:payload.asOf,months,adjustments:payload.adjustments||[]};
+}
+function previewSpending(current,incoming){
+  const byMonth=new Map((current?.months||[]).map(m=>[m.month,m]));let added=0,revised=0,unchanged=0;const changes=[];
+  for(const m of incoming.months){const old=byMonth.get(m.month);if(!old)added++;else if(JSON.stringify(old)===JSON.stringify(m))unchanged++;else revised++;if(!old||JSON.stringify(old)!==JSON.stringify(m))changes.push({date:m.month+'-01',before:old?.total??null,after:m.total});}
+  const oldAdjustments=new Map((current?.adjustments||[]).map(a=>[a.id,a]));
+  for(const a of incoming.adjustments||[]){const old=oldAdjustments.get(a.id);if(!old)added++;else if(JSON.stringify(old)===JSON.stringify(a))unchanged++;else revised++;if(!old||JSON.stringify(old)!==JSON.stringify(a))changes.push({date:a.date,before:old?.amount??null,after:a.amount,label:a.note});}
+  return{added,revised,unchanged,changes};
+}
+function mergeSpendingMonths(current,incoming){return[...new Map([...current,...incoming].map(m=>[m.month,m])).values()].sort((a,b)=>b.month.localeCompare(a.month));}
+function adjustedSpending(data){
+  return data.months.map(original=>{
+    const m={...original,categories:original.categories.map(c=>({...c})),daily:original.daily.map(p=>({...p})),adjustments:[]};
+    for(const a of data.adjustments||[]){const day=Number(a.date.slice(8));if(a.date.slice(0,7)!==m.month||day>m.daysElapsed)continue;
+      m.adjustments.push(a);m.total=cents(m.total+a.amount);let c=m.categories.find(c=>c.key===a.key);if(!c){c={key:a.key,label:a.label,amount:0};m.categories.push(c);}c.amount=cents(c.amount+a.amount);
+      for(const p of m.daily)if(p.day>=day)p.total=cents(p.total+a.amount);
+    }
+    m.categories.sort((a,b)=>b.amount-a.amount);return m;
+  });
+}
+function averageSpending(months,month){
+  const previous=[1,2,3].map(n=>months.find(m=>m.month===previousMonth(month,n)));if(previous.some(m=>!m||m.daysElapsed!==monthDays(m.month)))return null;
+  return{label:'Average month',months:previous.map(m=>m.month),daily:Array.from({length:monthDays(month)+1},(_,day)=>({day,total:cents(previous.reduce((s,m)=>s+m.daily[Math.min(day,m.daysElapsed)].total,0)/3)}))};
+}
+
+function localRevision(){return [...crypto.getRandomValues(new Uint8Array(16))].map(v=>v.toString(16).padStart(2,'0')).join('');}
+function emptyLedger(){return{format:'worth-backup-v1',schemaVersion:1,history:{schemaVersion:1,currency:'USD',scope:'Cash and savings minus cards; retirement excluded.',points:[],revision:localRevision(),storageReady:true},spending:{schemaVersion:1,type:'spending',currency:'USD',months:[],adjustments:[],revision:localRevision(),storageReady:true}};}
+function conflict(message){const e=new Error(message);e.status=409;throw e;}
+function mergeLocalHistory(current,payload){
+ const points=normalizePoints(payload),preview=previewMerge(current.points,points);
+ if(payload.expectedRevision&&payload.expectedRevision!==current.revision)conflict('Records changed in another tab. Refresh and preview again.');
+ if(preview.revised&&(!payload.allowRevisions||!payload.expectedRevision))conflict('Explicitly allow revisions and preview the current records before changing balances.');
+ if(!preview.added&&!preview.revised)return{data:current,result:{...preview,revision:current.revision,asOf:current.asOf,total:current.points.length}};
+ const merged=mergePoints(current.points,points),data={...current,points:merged,asOf:merged.at(-1).date,revision:localRevision(),updatedAt:new Date().toISOString()};
+ return{data,result:{...preview,revision:data.revision,asOf:data.asOf,total:merged.length}};
+}
+function mergeLocalSpending(current,payload){
+ const incoming=normalizeSpending(payload),preview=previewSpending(current,incoming);
+ if(payload.expectedRevision&&payload.expectedRevision!==current.revision)conflict('Spending changed in another tab. Refresh and preview again.');
+ if(preview.revised&&(!payload.allowRevisions||!payload.expectedRevision))conflict('Explicitly allow revisions and preview the current spending before changing it.');
+ if(!preview.added&&!preview.revised)return{data:current,result:{...preview,revision:current.revision,asOf:current.asOf,total:current.months.length}};
+ const data={...current,...incoming,months:mergeSpendingMonths(current.months,incoming.months),adjustments:[...new Map([...current.adjustments,...incoming.adjustments].map(a=>[a.id,a])).values()],asOf:incoming.asOf>(current.asOf||'')?incoming.asOf:current.asOf,revision:localRevision(),updatedAt:new Date().toISOString(),storageReady:true};
+ return{data,result:{...preview,revision:data.revision,asOf:data.asOf,total:data.months.length}};
+}
+function normalizeBackup(payload){
+ if(payload?.format!=='worth-backup-v1'||payload.schemaVersion!==1)throw new Error('Choose a Worth full backup JSON file. Individual history and spending files go in Add data.');
+ const points=payload.history?.points?.length?normalizePoints(payload.history):[];
+ const spending=payload.spending?.months?.length?normalizeSpending(payload.spending):null;
+ if(!points.length&&!spending)throw new Error('This backup has no financial records.');
+ return{format:'worth-backup-v1',schemaVersion:1,history:{points},spending};
+}
+function previewBackup(current,backup){
+ const h=backup.history.points.length?previewMerge(current.history.points,backup.history.points):{added:0,revised:0,unchanged:0};
+ const s=backup.spending?previewSpending(current.spending,backup.spending):{added:0,revised:0,unchanged:0};
+ return{history:h,spending:s,revised:h.revised+s.revised};
+}
+function restoreLocal(current,backup,expectedRevision,allowRevisions=false){
+ if(current.history.revision!==expectedRevision.history||current.spending.revision!==expectedRevision.spending)conflict('Records changed after the backup preview. Open the file again.');
+ const history=backup.history.points.length?mergeLocalHistory(current.history,{...backup.history,expectedRevision:current.history.revision,allowRevisions}).data:current.history;
+ const spending=backup.spending?mergeLocalSpending(current.spending,{...backup.spending,expectedRevision:current.spending.revision,allowRevisions}).data:current.spending;
+ return{...current,history,spending};
+}
+
+// All financial state is browser-local. No API, login, or cloud database.
+let dbPromise;
+function openLedgerDB(){
+ if(dbPromise)return dbPromise;
+ dbPromise=new Promise((resolve,reject)=>{
+  const req=indexedDB.open('worth-standalone-v1',1);
+  req.onupgradeneeded=()=>{const db=req.result;db.createObjectStore('ledger').put(emptyLedger(),'current');db.createObjectStore('backups');};
+  req.onsuccess=()=>{req.result.onversionchange=()=>req.result.close();resolve(req.result);};
+  req.onerror=()=>reject(new Error('Safari could not open local storage. Use normal browsing and keep an exported backup.'));
+  req.onblocked=()=>reject(new Error('Close other Worth tabs, then reload to open storage.'));
+ });return dbPromise;
+}
+async function readLocalLedger(){const db=await openLedgerDB();return new Promise((resolve,reject)=>{const req=db.transaction('ledger','readonly').objectStore('ledger').get('current');req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+async function changeLocalLedger(reduce){
+ const db=await openLedgerDB();return new Promise((resolve,reject)=>{
+  const tx=db.transaction(['ledger','backups'],'readwrite'),store=tx.objectStore('ledger'),request=store.get('current');let output,error;
+  request.onsuccess=()=>{try{const old=request.result,{data,result}=reduce(old);output=result;if(data.history.revision!==old.history.revision||data.spending.revision!==old.spending.revision){tx.objectStore('backups').put(old,new Date().toISOString()+'-'+localRevision());store.put(data,'current');}}catch(e){error=e;tx.abort();}};
+  tx.oncomplete=()=>resolve(output);tx.onabort=()=>reject(error||new Error('Could not save. Your previous records are unchanged. Export a backup and check device storage.'));tx.onerror=()=>{error=error||tx.error;};
+ });
+}
+async function localRequest(kind,options={}){
+ try{
+  let value;
+  if(options.method==='POST'){const payload=JSON.parse(options.body);value=await changeLocalLedger(old=>{const merged=kind==='history'?mergeLocalHistory(old.history,payload):mergeLocalSpending(old.spending,payload);return{data:{...old,[kind]:merged.data},result:merged.result};});}
+  else value=(await readLocalLedger())[kind];
+  return{ok:true,status:200,json:async()=>value};
+ }catch(e){return{ok:false,status:e.status||400,json:async()=>({error:e.message})};}
+}
+
+const $ = id => document.getElementById(id);
+const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2}).format(value);
+const compact = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
+const dateText = (date, short=false) => new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',...(short?{}:{year:'numeric'}),timeZone:'UTC'}).format(new Date(dateToTime(date)));
+const iso = time => new Date(time).toISOString().slice(0,10);
+let history, points=[], view=[0,1], selected=null, activeRange='ALL', geometry, importPoints=[], activeTab='paste', pointerMode=null, pointerStart, pinchStart;
+const pointers=new Map();
+const chart=$('chart'), ctx=chart.getContext('2d');
+const systemTheme=matchMedia('(prefers-color-scheme: dark)');
+function syncThemeControls(){const dark=document.documentElement.dataset.theme==='dark';$('theme-toggle').setAttribute('aria-label','Switch to '+(dark?'light':'dark')+' mode');$('theme-toggle').title='Switch to '+(dark?'light':'dark')+' mode';$('theme-system').setAttribute('aria-pressed',String(document.documentElement.dataset.themeChoice==='system'));document.querySelector('meta[name="theme-color"]').content=dark?'#09090b':'#f7f7f8';}
+function chooseTheme(choice){document.documentElement.dataset.themeChoice=choice;document.documentElement.dataset.theme=choice==='dark'||(choice==='system'&&systemTheme.matches)?'dark':'light';try{localStorage.setItem('worth-theme',choice);}catch{}syncThemeControls();scheduleDraw();window.dispatchEvent(new Event('worth-theme-change'));}
+$('theme-toggle').onclick=()=>chooseTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');$('theme-system').onclick=()=>chooseTheme('system');systemTheme.addEventListener('change',()=>{if(document.documentElement.dataset.themeChoice==='system')chooseTheme('system');});syncThemeControls();
+function chartPalette(){const s=getComputedStyle(document.documentElement);return Object.fromEntries(['grid','muted','green','card','comparison','crosshair','fill-top','fill-bottom'].map(k=>[k,s.getPropertyValue('--'+k).trim()]));}
+let frame=0, toastTimer, labelTimer;
+function scheduleDraw(){if(!frame)frame=requestAnimationFrame(()=>{frame=0;draw();});}
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4000);}
+function showError(message){$('chart-error').textContent=message;$('chart-error').hidden=false;}
+async function loadHistory(preserve=false){
+  $('refresh').disabled=true;
+  try{
+    const res=await localRequest('history');
+    if(!res.ok)throw new Error((await res.json()).error||'Could not open local records.');
+    const data=await res.json();
+    history=data;points=data.points.length?normalizePoints(data):[];$('chart-error').hidden=true;
+    for(const b of document.querySelectorAll('[data-range],#zoom-in,#zoom-out,#latest,#example,#open-records,#export-csv'))b.disabled=!points.length;
+    $('setup-card').hidden=!!points.length;
+    if(!points.length){$('hero-value').textContent='—';$('change').textContent='Import a backup or add your first snapshot';$('change-period').textContent='';$('asof').textContent='No snapshots yet';$('range-caption').textContent='Your timeline will appear here';$('points-label').textContent='';$('save-status').textContent='On this device only · export a backup to keep a separate copy';return;}
+
+    const min=dateToTime(points[0].date),max=dateToTime(points.at(-1).date);
+    view=preserve?clampWindow(view[0],view[1],min,max):[min,max];
+    selected=null;
+    updateSummary();scheduleDraw();
+  }catch(e){showError(e.message);$('asof').textContent='Unavailable';}
+  finally{$('refresh').disabled=false;}
+}
+function updateSummary(){
+  if(!points.length)return;
+  const last=points.at(-1), first=points[0], peak=points.reduce((a,b)=>a.netWorth>b.netWorth?a:b);
+  const grow=last.netWorth-first.netWorth;
+  $('asof').textContent='As of '+dateText(last.date,true);
+  $('total-growth').textContent=(grow>=0?'+':'−')+compact(Math.abs(grow));
+  $('growth-caption').textContent=(first.netWorth?((grow/Math.abs(first.netWorth))*100).toFixed(1)+'% · ':'')+'since '+dateText(first.date);
+  $('peak-value').textContent=compact(peak.netWorth);$('peak-date').textContent=dateText(peak.date);
+  $('first-date').textContent=dateText(first.date);$('history-count').textContent=points.length+' daily snapshots';
+  $('earliest-note').textContent='The connected service’s earliest recorded snapshot is '+dateText(first.date)+'. Older transaction history is not treated as verified daily balance history.';
+  $('save-status').textContent='Saved on this device · '+points.length+' snapshots · export a backup to move devices';
+  $('manual-date').value=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  updateReadout();
+}
+function updateReadout(){
+  if(!points.length)return;
+  const last=points.at(-1), chosen=selected||last;
+  const val=money(chosen.netWorth), dot=val.lastIndexOf('.');
+  $('hero-value').replaceChildren();
+  $('hero-value').append(document.createTextNode(val.slice(0,dot)));
+  const cents=document.createElement('span');cents.className='cents';cents.textContent=val.slice(dot);$('hero-value').append(cents);
+  $('value-label').textContent=selected?'RECORDED '+dateText(selected.date).toUpperCase():'LATEST RECORDED';
+  const start=nearestPoint(points,view[0]),end=nearestPoint(points,view[1]);
+  const change=end.netWorth-start.netWorth, pct=start.netWorth?change/Math.abs(start.netWorth)*100:null;
+  $('change').textContent=(change>=0?'↗ +':'↘ −')+compact(Math.abs(change))+(pct===null?'':' ('+(pct>=0?'+':'')+pct.toFixed(1)+'%)');
+  $('change').classList.toggle('negative',change<0);
+  $('change-period').textContent='in visible period';
+  const span=view[1]-view[0];
+  $('range-caption').textContent=dateText(iso(view[0]))+' – '+dateText(iso(view[1]));
+  const count=points.filter(p=>dateToTime(p.date)>=view[0]&&dateToTime(p.date)<=view[1]).length;
+  $('points-label').textContent=count+' snapshots';
+  $('clear-selection').hidden=!selected;
+  document.querySelectorAll('[data-range]').forEach(b=>{const on=b.dataset.range===activeRange;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+  const whole=dateToTime(points.at(-1).date)-dateToTime(points[0].date);
+  $('zoom-out').disabled=span>=whole-1;$('zoom-in').disabled=span<=Math.min(2*DAY,whole)+1;
+  chart.setAttribute('aria-label','Net worth from '+dateText(start.date)+' to '+dateText(end.date)+'. Latest '+money(last.netWorth)+'. '+(selected?'Selected '+dateText(selected.date)+', '+money(selected.netWorth)+'. ':'')+'Arrow keys move timeline. Plus and minus zoom. Home resets.');
+}
+function setView(start,end,range=null){
+  if(!points.length)return;
+  view=clampWindow(start,end,dateToTime(points[0].date),dateToTime(points.at(-1).date));
+  activeRange=range;selected=null;updateReadout();scheduleDraw();
+}
+function snapRange(range){
+  const end=dateToTime(points.at(-1).date);let start=dateToTime(points[0].date);
+  if(range==='1W')start=end-6*DAY;
+  if(range==='1M'){const d=new Date(end);const day=d.getUTCDate();d.setUTCDate(1);d.setUTCMonth(d.getUTCMonth()-1);const lastDay=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();d.setUTCDate(Math.min(day,lastDay));start=d.getTime();}
+  if(range==='1Y')start=end-365*DAY;
+  setView(start,end,range);
+  if(range==='1Y'&&start<dateToTime(points[0].date))toast('Showing all available history. A full year has not accumulated yet.');
+}
+function zoom(factor,anchor=.5){const span=view[1]-view[0],a=view[0]+span*anchor;setView(a-span*factor*anchor,a+span*factor*(1-anchor));}
+function dataAt(time){return nearestPoint(points,time);}
+function draw(){
+  if(!points.length)return;
+  const palette=chartPalette(),box=chart.getBoundingClientRect(),w=box.width,h=box.height,dpr=Math.min(window.devicePixelRatio||1,3);
+  if(!w||!h)return;
+  chart.width=Math.round(w*dpr);chart.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  const pad={l:9,r:58,t:20,b:36},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b,span=Math.max(view[1]-view[0],DAY);
+  const visible=points.filter(p=>{const t=dateToTime(p.date);return t>=view[0]&&t<=view[1]});
+  const relevant=[...visible,dataAt(view[0]),dataAt(view[1])].filter(Boolean);
+  let min=Math.min(...relevant.map(p=>p.netWorth)),max=Math.max(...relevant.map(p=>p.netWorth));
+  const margin=Math.max((max-min)*.17,200);min-=margin;max+=margin;
+  const rawStep=(max-min)/4,exp=10**Math.floor(Math.log10(rawStep)),step=[1,2,2.5,5,10].map(n=>n*exp).find(n=>n>=rawStep)||exp*10;
+  min=Math.floor(min/step)*step;max=Math.ceil(max/step)*step;
+  const x=t=>pad.l+(t-view[0])/span*pw,y=v=>pad.t+(max-v)/(max-min)*ph;
+  geometry={w,h,pad,pw,ph,x,y,min,max};
+  ctx.lineWidth=1;ctx.font='10px -apple-system, BlinkMacSystemFont, sans-serif';ctx.textBaseline='middle';
+  for(let v=min;v<=max+.01;v+=step){const yy=y(v);ctx.strokeStyle=palette.grid;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=palette.muted;ctx.textAlign='right';ctx.fillText('$'+(Math.abs(v)>=1000?(v/1000).toFixed(v%1000?1:0)+'k':Math.round(v)),w-2,yy);}
+  const labelCount=w<450?3:5;
+  for(let i=0;i<labelCount;i++){const t=view[0]+span*i/(labelCount-1),xx=x(t);ctx.textAlign=i===0?'left':i===labelCount-1?'right':'center';ctx.fillStyle=palette.muted;ctx.fillText(dateText(iso(t),true),xx,h-12);}
+  const all=points.map(p=>({...p,t:dateToTime(p.date)}));
+  ctx.save();ctx.beginPath();ctx.rect(pad.l,pad.t,pw,ph);ctx.clip();
+  const gradient=ctx.createLinearGradient(0,pad.t,0,h-pad.b);gradient.addColorStop(0,palette['fill-top']);gradient.addColorStop(1,palette['fill-bottom']);
+  ctx.beginPath();ctx.moveTo(x(all[0].t),h-pad.b);for(const p of all)ctx.lineTo(x(p.t),y(p.netWorth));ctx.lineTo(x(all.at(-1).t),h-pad.b);ctx.closePath();ctx.fillStyle=gradient;ctx.fill();
+  ctx.strokeStyle=palette.green;ctx.lineWidth=2.8;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();let prev=null;
+  for(const p of all){if(!prev||p.t-prev.t>DAY*1.5){if(prev)ctx.stroke();ctx.beginPath();ctx.moveTo(x(p.t),y(p.netWorth));}else ctx.lineTo(x(p.t),y(p.netWorth));prev=p;}ctx.stroke();
+  for(let i=1;i<all.length;i++)if(all[i].t-all[i-1].t>DAY*1.5){ctx.save();ctx.setLineDash([3,5]);ctx.strokeStyle=palette.comparison;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x(all[i-1].t),y(all[i-1].netWorth));ctx.lineTo(x(all[i].t),y(all[i].netWorth));ctx.stroke();ctx.restore();}
+  ctx.restore();
+  const endpoint=all.at(-1);if(endpoint.t>=view[0]&&endpoint.t<=view[1]){ctx.beginPath();ctx.arc(x(endpoint.t),y(endpoint.netWorth),4,0,Math.PI*2);ctx.fillStyle=palette.green;ctx.fill();}
+  if(selected&&dateToTime(selected.date)>=view[0]&&dateToTime(selected.date)<=view[1]){
+    const sx=x(dateToTime(selected.date)),sy=y(selected.netWorth);ctx.strokeStyle=palette.crosshair;ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(sx,pad.t);ctx.lineTo(sx,h-pad.b);ctx.stroke();ctx.setLineDash([]);ctx.beginPath();ctx.arc(sx,sy,6,0,Math.PI*2);ctx.fillStyle=palette.card;ctx.fill();ctx.strokeStyle=palette.green;ctx.lineWidth=2;ctx.stroke();
+    const tip=$('chart-tooltip');$('tooltip-date').textContent=dateText(selected.date);$('tooltip-value').textContent=money(selected.netWorth);tip.hidden=false;tip.style.left=Math.max(77,Math.min(w-77,sx))+'px';tip.style.top=Math.max(0,Math.min(h-122,sy-104))+'px';
+  }else $('chart-tooltip').hidden=true;
+}
+function position(e){const r=chart.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+function inspectAt(px){if(!geometry)return;const fraction=Math.max(0,Math.min(1,(px-geometry.pad.l)/geometry.pw));const visible=points.filter(p=>dateToTime(p.date)>=view[0]&&dateToTime(p.date)<=view[1]);selected=nearestPoint(visible,view[0]+fraction*(view[1]-view[0]));updateReadout();scheduleDraw();}
+function announceGesture(text){$('gesture-label').textContent=text;$('gesture-label').hidden=false;clearTimeout(labelTimer);labelTimer=setTimeout(()=>$('gesture-label').hidden=true,1800);}
+chart.addEventListener('pointerdown',e=>{
+  if(!points.length||!geometry)return;e.preventDefault();chart.setPointerCapture(e.pointerId);const p=position(e);pointers.set(e.pointerId,p);
+  if(pointers.size===2){const pair=[...pointers.values()];pinchStart={distance:Math.max(1,Math.hypot(pair[1].x-pair[0].x,pair[1].y-pair[0].y)),mid:(pair[0].x+pair[1].x)/2,view:[...view]};pointerMode='pinch';selected=null;announceGesture('Pinch to zoom');return;}
+  const time=view[0]+Math.max(0,Math.min(1,(p.x-geometry.pad.l)/geometry.pw))*(view[1]-view[0]);
+  const lineY=geometry.y(lineHitValue(points,time));pointerMode=p.y<=lineY+14?'inspect':'pan';pointerStart={p,view:[...view]};
+  if(pointerMode==='inspect')inspectAt(p.x);else {selected=null;announceGesture('Move timeline');updateReadout();scheduleDraw();}
+});
+chart.addEventListener('pointermove',e=>{
+  if(!pointers.has(e.pointerId)){if(e.pointerType==='mouse'&&!e.buttons&&geometry){const p=position(e),time=view[0]+(p.x-geometry.pad.l)/geometry.pw*(view[1]-view[0]);if(p.y<=geometry.y(lineHitValue(points,time))+14&&p.x>=geometry.pad.l&&p.x<=geometry.w-geometry.pad.r)inspectAt(p.x);}return;}
+  e.preventDefault();const p=position(e);pointers.set(e.pointerId,p);
+  if(pointerMode==='pinch'&&pointers.size>=2){const pair=[...pointers.values()],distance=Math.max(1,Math.hypot(pair[1].x-pair[0].x,pair[1].y-pair[0].y)),mid=(pair[0].x+pair[1].x)/2;
+    const oldSpan=pinchStart.view[1]-pinchStart.view[0],newSpan=oldSpan*pinchStart.distance/distance,anchor=(pinchStart.mid-geometry.pad.l)/geometry.pw;
+    const anchorTime=pinchStart.view[0]+oldSpan*anchor,newStart=anchorTime-newSpan*anchor-(mid-pinchStart.mid)/geometry.pw*newSpan;setView(newStart,newStart+newSpan);return;
+  }
+  if(pointerMode==='inspect')inspectAt(p.x);
+  else if(pointerMode==='pan'){const delta=-(p.x-pointerStart.p.x)/geometry.pw*(pointerStart.view[1]-pointerStart.view[0]);setView(pointerStart.view[0]+delta,pointerStart.view[1]+delta);}
+});
+function endPointer(e){pointers.delete(e.pointerId);if(pointers.size===0){pointerMode=null;pinchStart=null;}else if(pointerMode==='pinch'){pointerMode='paused';}}
+chart.addEventListener('pointerup',endPointer);chart.addEventListener('pointercancel',endPointer);chart.addEventListener('lostpointercapture',endPointer);
+chart.addEventListener('wheel',e=>{if(!points.length||!geometry)return;e.preventDefault();const r=position(e),anchor=Math.max(0,Math.min(1,(r.x-geometry.pad.l)/geometry.pw));zoom(Math.exp(e.deltaY*.002),anchor);},{passive:false});
+chart.addEventListener('keydown',e=>{const span=view[1]-view[0];if(e.key==='+'||e.key==='='){e.preventDefault();zoom(.7);}else if(e.key==='-'){e.preventDefault();zoom(1.4);}else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const dir=e.key==='ArrowRight'?1:-1;setView(view[0]+dir*span*.2,view[1]+dir*span*.2);}else if(e.key==='Home'){e.preventDefault();snapRange('ALL');}else if(e.key==='Escape'){selected=null;updateReadout();scheduleDraw();}});
+new ResizeObserver(scheduleDraw).observe(chart);
+document.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>snapRange(b.dataset.range)));
+$('zoom-in').onclick=()=>zoom(.7);$('zoom-out').onclick=()=>zoom(1.4);$('latest').onclick=()=>{const end=dateToTime(points.at(-1).date);setView(end-(view[1]-view[0]),end);};$('clear-selection').onclick=()=>{selected=null;updateReadout();scheduleDraw();};$('refresh').onclick=()=>loadHistory(true);
+function parseData(text){
+  const raw=text.trim();if(!raw)throw new Error('Paste data or choose a file first.');
+  if(raw.startsWith('{')||raw.startsWith('['))return normalizePoints(JSON.parse(raw));
+  const lines=raw.replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim());
+  const delimiter=lines[0].includes('\t')?'\t':',';
+  const split=line=>{const cells=[];let cell='',quoted=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(quoted&&line[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}else if(c===delimiter&&!quoted){cells.push(cell.trim());cell='';}else cell+=c;}cells.push(cell.trim());return cells;};
+  const headers=split(lines[0]).map(x=>x.toLowerCase().replace(/[_\s-]/g,''));const di=headers.indexOf('date'),vi=headers.findIndex(x=>['networth','value'].includes(x));
+  if(di<0||vi<0)throw new Error('CSV needs date and netWorth columns.');
+  return normalizePoints(lines.slice(1).map(line=>{const row=split(line);const value=row[vi]?.replace(/[$,]/g,'');if(value===undefined||value==='')throw new Error('Missing net worth value.');return{date:row[di],netWorth:Number(value),source:'csv-import'};}));
+}
+function feedback(message,error=false){$('import-feedback').textContent=message;$('import-feedback').classList.toggle('error',error);$('import-feedback').hidden=false;}
+function resetPreview(){importPoints=[];$('import-preview').hidden=true;$('save-import').hidden=true;$('preview-import').hidden=activeTab==='connect';$('import-feedback').hidden=true;}
+function openImport(){resetPreview();$('import-dialog').showModal();}
+$('open-import').onclick=openImport;
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{activeTab=b.dataset.tab;document.querySelectorAll('[data-tab]').forEach(t=>{const on=t===b;t.classList.toggle('active',on);t.setAttribute('aria-pressed',String(on));});document.querySelectorAll('.tab-panel').forEach(s=>s.hidden=s.id!=='tab-'+activeTab);resetPreview();});
+for(const id of ['import-text','manual-date','manual-value','manual-note'])$(id).addEventListener('input',resetPreview);
+$('import-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;if(file.size>3000000)return feedback('Choose a file smaller than 3 MB.',true);$('import-text').value=await file.text();resetPreview();feedback('Loaded '+file.name+'. Preview it before saving.');};
+$('example').onclick=()=>{$('import-text').value=JSON.stringify({points:[{date:points.at(-1).date,netWorth:points.at(-1).netWorth}]},null,2);resetPreview();feedback('This example repeats your latest point, so it will make no change. Replace it with a new snapshot.');};
+function tableHtml(entries,head,body){const table=document.createElement('table'),thead=document.createElement('thead'),tr=document.createElement('tr');head.forEach(h=>{const th=document.createElement('th');th.textContent=h;tr.append(th);});thead.append(tr);table.append(thead);const tb=document.createElement('tbody');for(const row of entries){const r=document.createElement('tr');for(const text of body(row)){const td=document.createElement('td');td.textContent=text;r.append(td);}tb.append(r);}table.append(tb);return table;}
+$('preview-import').onclick=()=>{
+  try{
+    if(!history)throw new Error('Load your history before importing.');
+    if(activeTab==='manual'){const val=$('manual-value').value;if(val==='')throw new Error('Enter the net worth amount.');importPoints=normalizePoints([{date:$('manual-date').value,netWorth:Number(val),note:$('manual-note').value,source:'manual'}]);}
+    else importPoints=parseData($('import-text').value);
+    const preview=previewMerge(points,importPoints);$('preview-summary').textContent=preview.added+' new · '+preview.revised+' revised · '+preview.unchanged+' unchanged';
+    $('preview-table').replaceChildren(tableHtml(preview.changes.slice(0,100),['Date','Saved','Imported'],r=>[dateText(r.date),r.before===null?'New':money(r.before),money(r.after)]));
+    $('revision-label').hidden=!preview.revised;$('allow-revisions').checked=false;$('import-preview').hidden=false;$('save-import').hidden=!(preview.added+preview.revised);$('preview-import').hidden=true;
+    feedback(preview.added+preview.revised?'Review the changes, then save. Existing dates outside this import will be preserved.':'Everything already matches. Your timeline is up to date.');
+  }catch(e){feedback(e.message,true);}
+};
+$('save-import').onclick=async()=>{
+  const preview=previewMerge(points,importPoints);if(preview.revised&&!$('allow-revisions').checked)return feedback('Check the revision box to update existing dates.',true);
+  $('save-import').disabled=true;
+  try{const res=await localRequest('history',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({points:importPoints,expectedRevision:history.revision,allowRevisions:$('allow-revisions').checked,source:'web-import'})});const result=await res.json();if(!res.ok)throw new Error(result.error||'Could not save.');await loadHistory(true);$('import-dialog').close();toast('Saved '+result.added+' new and '+result.revised+' revised snapshots.');}
+  catch(e){feedback(e.message,true);}finally{$('save-import').disabled=false;}
+};
+function download(name,content,type){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+$('export-json').onclick=()=>exportFullBackup();
+$('export-csv').onclick=()=>download('net-worth-'+points.at(-1).date+'.csv','date,netWorth\n'+points.map(p=>p.date+','+p.netWorth.toFixed(2)).join('\n'),'text/csv');
+$('open-records').onclick=()=>{$('records-table').replaceChildren(tableHtml([...points].reverse(),['Date','Net worth'],p=>[dateText(p.date),money(p.netWorth)]));$('records-dialog').showModal();};
+$('manual-date').value=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+await loadHistory();
+
+// Spending is stored independently from balance snapshots. No bank credentials live here.
+let spendingState=null,spendingMonths=[],spendingMonth=null,baselineChoice='average',spendingDay=null,categoriesExpanded=false,spendingGeometry=null,spendingImport=null;
+const spendingChart=$('spend-chart'),spendingCtx=spendingChart.getContext('2d');
+const categoryColors=['#00a63c','#38c775','#8adeb0','#b9ead0','#96cbfb','#339df8','#008cf0','#0674ce','#00579c','#7068d8','#a78ee5'];
+const categoryPaths={
+ shopping:'<path d="M6 7h12l1.5 14h-15L6 7Z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/>',
+ groceries:'<path d="m4 10 2 11h12l2-11H4Zm-1 0h18M8 11l1 9m7-9-1 9M8 3l-4 7m12-7 4 7M12 11v9"/>',
+ transportation:'<path d="m4 10 3-6h10l3 6M4 10h16l2 4v4h-3m-14 0H2v-4l2-4Zm3 8h10M9 4v6"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',
+ financial:'<path d="m2 8 10-5 10 5H2Zm2 13h16M5 11v7m7-7v7m7-7v7M3 18h18v3H3Z"/>',
+ entertainment:'<path d="m4 8 2 13h12l2-13M8 9l1 11m7-11-1 11M12 9v11M4 8a3 3 0 0 1 2-5 3 3 0 0 1 5-1 3 3 0 0 1 5 0 3 3 0 0 1 4 5L16 9l-4-2-4 2-4-1Z"/>',
+ education:'<path d="M5 3h14v18H6a2 2 0 0 1 0-4h13M5 3v16"/>',
+ services:'<path d="M21 4a6 6 0 0 1-8 8l-8 8a2 2 0 0 1-3-3l8-8a6 6 0 0 1 8-8l-4 4 1 3 3 1 3-5Z"/>',
+ dining_and_drinks:'<path d="M3 17h18M4 16a8 8 0 0 1 16 0M12 5v2M2 19h20M9 3h6"/>',
+ housing:'<path d="m2 10 10-7 10 7M5 8v13h14V8M9 21v-7h6v7"/>',
+ health_and_wellness:'<path d="M12 21S2 15 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 7-10 13-10 13Z"/>',
+ bills_and_utilities:'<path d="m13 2-9 12h7l-1 8 10-13h-8l1-7Z"/>',
+ other:'<circle cx="12" cy="12" r="9"/><path d="M7 12h.01M12 12h.01M17 12h.01"/>'
+};
+function monthLabel(month,year=false){return new Intl.DateTimeFormat('en-US',{month:'long',...(year?{year:'numeric'}:{}),timeZone:'UTC'}).format(new Date(dateToTime(month+'-01')));}
+function monthOptionLabel(month){return monthLabel(month,month.slice(0,4)!==spendingMonths[0]?.month.slice(0,4));}
+function spendMonthRecord(){return spendingMonths.find(m=>m.month===spendingMonth);}
+function baselineRecord(){
+ const m=spendMonthRecord();if(!m)return null;
+ if(baselineChoice==='average')return averageSpending(spendingMonths,m.month);
+ const b=spendingMonths.find(m=>m.month===baselineChoice);return b?{label:monthOptionLabel(b.month),months:[b.month],daily:Array.from({length:monthDays(m.month)+1},(_,day)=>({day,total:b.daily[Math.min(day,b.daysElapsed)].total}))}:null;
+}
+function option(value,label){const o=document.createElement('option');o.value=value;o.textContent=label;return o;}
+function setMonthOptions(){
+ for(const id of ['category-month','spend-month']){const select=$(id);select.replaceChildren(...spendingMonths.map(m=>option(m.month,monthOptionLabel(m.month))));select.value=spendingMonth;select.disabled=false;}
+ const previous=spendingMonths.filter(m=>m.month!==spendingMonth),average=averageSpending(spendingMonths,spendingMonth);
+ $('spend-baseline').replaceChildren(...(average?[option('average','Average month')]:[]),...previous.map(m=>option(m.month,monthOptionLabel(m.month))));
+ if((baselineChoice==='average'&&!average)||(baselineChoice===spendingMonth)||!['average',...previous.map(m=>m.month)].includes(baselineChoice))baselineChoice=previous.find(m=>m.month===previousMonth(spendingMonth))?.month||previous[0]?.month||'';
+ $('spend-baseline').value=baselineChoice;$('spend-baseline').disabled=!$('spend-baseline').options.length;
+}
+async function loadSpending(preserve=false){
+ try{const res=await localRequest('spending');if(!res.ok)throw new Error((await res.json()).error||'Could not open local spending.');const data=await res.json();if(!data.months.length){spendingState=data;spendingMonths=[];$('spending').hidden=true;return;}$('spending').hidden=false;$('setup-card').hidden=true;const normalized=normalizeSpending(data);spendingState={...data,...normalized};spendingMonths=adjustedSpending(normalized);if(!preserve||!spendingMonths.some(m=>m.month===spendingMonth))spendingMonth=spendingMonths[0].month;
+ spendingDay=null;setMonthOptions();renderCategories();updateSpendingReadout();drawSpending();$('spending-error').hidden=true;
+ $('spending-asof').textContent='Imported through '+dateText(data.asOf,true);$('spending-coverage').textContent='Spending history: '+monthLabel(spendingMonths.at(-1).month,true)+'–'+monthLabel(spendingMonths[0].month,true)+'. Imported through '+dateText(data.asOf)+'. Average month uses the three complete months before the selected month, compared at the same day. A shorter month holds its final total for later days.';
+ }catch(e){$('spending-error').textContent=e.message;$('spending-error').hidden=false;$('spending-asof').textContent='Unavailable';}
+}
+function renderCategories(){
+ const m=spendMonthRecord();if(!m)return;
+ $('spending-total').textContent=money(m.total);const positive=m.categories.filter(c=>c.amount>0),sum=positive.reduce((s,c)=>s+c.amount,0);
+ $('category-strip').replaceChildren();for(const [i,c]of m.categories.entries()){if(c.amount<=0)continue;const segment=document.createElement('span');segment.className='category-segment';segment.style.flexGrow=String(c.amount/sum);segment.style.background=categoryColors[i%categoryColors.length];segment.title=c.label+': '+money(c.amount);$('category-strip').append(segment);}
+ $('category-strip').setAttribute('aria-label',m.categories.map(c=>c.label+' '+money(c.amount)).join(', '));
+ $('category-list').replaceChildren();for(const [i,c]of m.categories.entries()){if(!categoriesExpanded&&i>=5)break;const row=document.createElement('div');row.className='category-row';const icon=document.createElement('span');icon.className='category-icon';icon.setAttribute('aria-hidden','true');icon.innerHTML='<svg viewBox="0 0 24 24">'+(categoryPaths[c.key]||categoryPaths[c.key.replaceAll('-','_')]||categoryPaths[c.key.includes('dining')?'dining_and_drinks':c.key.includes('health')?'health_and_wellness':c.key.includes('bills')?'bills_and_utilities':'other'])+'</svg>';
+ const main=document.createElement('div');main.className='category-main';const line=document.createElement('div');line.className='category-line';const name=document.createElement('span');name.className='category-name';name.textContent=c.label;const value=document.createElement('span');value.className='category-amount';value.textContent=money(c.amount);line.append(name,value);const track=document.createElement('div');track.className='category-track';track.setAttribute('aria-hidden','true');const fill=document.createElement('div');fill.className='category-fill';fill.style.width=Math.max(0,sum?c.amount/sum*100:0)+'%';fill.style.background=categoryColors[i%categoryColors.length];if(c.amount<=0)fill.style.display='none';track.append(fill);main.append(line,track);row.append(icon,main);$('category-list').append(row);}
+ const toggle=$('show-categories');toggle.hidden=m.categories.length<=5;toggle.setAttribute('aria-expanded',String(categoriesExpanded));toggle.textContent=categoriesExpanded?'Show less':'Show all '+m.categories.length+' categories';const chevron=document.createElement('span');chevron.setAttribute('aria-hidden','true');chevron.textContent=categoriesExpanded?'⌃':'⌄';toggle.append(chevron);
+ $('category-footnote').textContent='Net posted spending · '+m.daysElapsed+' '+(m.daysElapsed===1?'day':'days')+(m.adjustments.length?' · includes '+money(m.adjustments.reduce((s,a)=>s+a.amount,0))+' confirmed cash spending':'');
+}
+function selectSpendingMonth(month){spendingMonth=month;spendingDay=null;categoriesExpanded=false;setMonthOptions();renderCategories();updateSpendingReadout();drawSpending();}
+function updateSpendingReadout(){
+ const m=spendMonthRecord();if(!m)return;const b=baselineRecord(),day=spendingDay??m.daysElapsed,current=m.daily[day].total,previous=b?.daily[day]?.total;
+ $('spend-current').textContent=money(current);$('spend-previous').textContent=previous===undefined?'—':money(previous);$('spend-delta').textContent=previous===undefined?'':(current-previous>0?'+':current-previous<0?'−':'')+money(Math.abs(cents(current-previous)));$('spend-delta').classList.toggle('under',previous!==undefined&&current<=previous);
+ $('spend-date').textContent=(spendingDay===null?'Through ':day===0?'Start of ':'')+(day===0?monthLabel(m.month,true):dateText(m.month+'-'+String(day).padStart(2,'0')));$('clear-spending').hidden=spendingDay===null;
+ const names=b?.months.map(s=>new Intl.DateTimeFormat('en-US',{month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(dateToTime(s+'-01')))).reverse().join(', ');
+ $('baseline-note').textContent=b?(baselineChoice==='average'?'Average of '+names+'. ':'Compared with '+monthLabel(b.months[0],true)+'. ')+(spendingDay===null?'Values compare the same day of each month.':'Showing cumulative net spending on day '+day+'.'):'No complete comparison month is available.';
+ spendingChart.setAttribute('aria-label',monthLabel(m.month,true)+' cumulative net spending, '+money(current)+' at '+(day===0?'the start of the month':'day '+day)+(previous===undefined?'':', versus '+money(previous)+' for '+b.label)+'. Drag or use left and right arrow keys to inspect. Escape clears selection.');
+}
+function drawSpending(){
+ const m=spendMonthRecord();if(!m)return;const b=baselineRecord(),palette=chartPalette(),box=spendingChart.getBoundingClientRect(),w=box.width,h=box.height,dpr=Math.min(devicePixelRatio||1,3);if(!w||!h)return;
+ spendingChart.width=Math.round(w*dpr);spendingChart.height=Math.round(h*dpr);const c=spendingCtx;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+ const pad={l:8,r:52,t:17,b:30},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b,days=monthDays(m.month),all=[...m.daily,...(b?.daily||[])].map(p=>p.total);
+ const highest=Math.max(1,...all),lowest=Math.min(0,...all),rawStep=(highest-lowest)/4,power=10**Math.floor(Math.log10(rawStep)),step=[1,1.5,2,2.5,5,10].map(n=>n*power).find(n=>n>=rawStep)||power*10,min=Math.floor(lowest/step)*step,max=Math.ceil(highest/step)*step;
+ const x=day=>pad.l+day/days*pw,y=value=>pad.t+(max-value)/(max-min)*ph;
+ spendingGeometry={pad,pw,days,w,h,x,y};c.font='11px -apple-system,BlinkMacSystemFont,sans-serif';c.textBaseline='middle';c.lineWidth=1;
+ for(let value=min;value<=max+.001;value+=step){const yy=y(value);c.strokeStyle=palette.grid;c.setLineDash([4,5]);c.beginPath();c.moveTo(pad.l,yy);c.lineTo(w-pad.r,yy);c.stroke();c.setLineDash([]);c.fillStyle=palette.muted;c.textAlign='left';const label=Math.abs(value)>=1000?'$'+(value/1000).toFixed(value%1000?1:0)+'K':compact(value);c.fillText(label,w-pad.r+8,yy);}
+ const line=(series,color,width)=>{if(!series?.length)return;c.beginPath();series.forEach((p,i)=>{if(i===0)c.moveTo(x(p.day),y(p.total));else c.lineTo(x(p.day),y(p.total));});c.strokeStyle=color;c.lineWidth=width;c.lineJoin='round';c.lineCap='round';c.stroke();};
+ if(b)line(b.daily,palette.comparison,2.7);
+ const gradient=c.createLinearGradient(0,pad.t,0,h-pad.b);gradient.addColorStop(0,palette['fill-top']);gradient.addColorStop(1,palette['fill-bottom']);c.beginPath();c.moveTo(x(0),y(min));for(const p of m.daily)c.lineTo(x(p.day),y(p.total));c.lineTo(x(m.daysElapsed),y(min));c.closePath();c.fillStyle=gradient;c.fill();line(m.daily,palette.green,3);
+ for(const day of [1,Math.round(days/2),days]){c.textAlign=day===1?'left':day===days?'right':'center';c.fillStyle=palette.muted;c.fillText(new Intl.DateTimeFormat('en-US',{month:'short',timeZone:'UTC'}).format(new Date(dateToTime(m.month+'-01')))+' '+day,x(day),h-9);}
+ if(spendingDay!==null){const xx=x(spendingDay);c.strokeStyle=palette.crosshair;c.lineWidth=1.2;c.beginPath();c.moveTo(xx,pad.t);c.lineTo(xx,h-pad.b);c.stroke();for(const [value,color]of [[b?.daily[spendingDay]?.total,palette.comparison],[m.daily[spendingDay]?.total,palette.green]]){if(value===undefined)continue;c.beginPath();c.arc(xx,y(value),5.5,0,Math.PI*2);c.fillStyle=color;c.fill();c.lineWidth=3;c.strokeStyle=palette.card;c.stroke();}}
+}
+function inspectSpending(clientX){const m=spendMonthRecord();if(!m||!spendingGeometry)return;const g=spendingGeometry,x=clientX-spendingChart.getBoundingClientRect().left;spendingDay=Math.max(0,Math.min(m.daysElapsed,Math.round((x-g.pad.l)/g.pw*g.days)));updateSpendingReadout();drawSpending();}
+let spendingPointer=null;
+spendingChart.addEventListener('pointerdown',e=>{if(!spendingState)return;spendingPointer=e.pointerId;spendingChart.setPointerCapture(e.pointerId);inspectSpending(e.clientX);});
+spendingChart.addEventListener('pointermove',e=>{if(e.pointerId===spendingPointer||(e.pointerType==='mouse'&&!e.buttons))inspectSpending(e.clientX);});
+for(const name of ['pointerup','pointercancel','lostpointercapture'])spendingChart.addEventListener(name,()=>spendingPointer=null);
+spendingChart.addEventListener('keydown',e=>{const m=spendMonthRecord();if(!m)return;let day=spendingDay??m.daysElapsed;if(e.key==='ArrowLeft')day--;else if(e.key==='ArrowRight')day++;else if(e.key==='Home')day=0;else if(e.key==='End')day=m.daysElapsed;else if(e.key==='Escape'){spendingDay=null;updateSpendingReadout();drawSpending();return;}else return;e.preventDefault();spendingDay=Math.min(m.daysElapsed,Math.max(0,day));updateSpendingReadout();drawSpending();});
+$('category-month').onchange=e=>selectSpendingMonth(e.target.value);$('spend-month').onchange=e=>selectSpendingMonth(e.target.value);$('spend-baseline').onchange=e=>{baselineChoice=e.target.value;updateSpendingReadout();drawSpending();};$('show-categories').onclick=()=>{categoriesExpanded=!categoriesExpanded;renderCategories();};$('clear-spending').onclick=()=>{spendingDay=null;updateSpendingReadout();drawSpending();};
+new ResizeObserver(drawSpending).observe(spendingChart);window.addEventListener('worth-theme-change',drawSpending);
+$('refresh').onclick=async()=>{$('refresh').disabled=true;await Promise.all([loadHistory(true),loadSpending(true)]);$('refresh').disabled=false;};
+const originalPreview=$('preview-import').onclick,originalSave=$('save-import').onclick;
+$('spending-import-text').addEventListener('input',()=>{spendingImport=null;resetPreview();});
+$('spending-import-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;if(file.size>3000000)return feedback('Choose a file smaller than 3 MB.',true);$('spending-import-text').value=await file.text();spendingImport=null;resetPreview();feedback('Loaded '+file.name+'. Preview before saving.');};
+$('preview-import').onclick=()=>{
+ if(activeTab!=='spending')return originalPreview();
+ try{if(!spendingState)throw new Error('Load spending before importing.');spendingImport=normalizeSpending(JSON.parse($('spending-import-text').value));const preview=previewSpending(spendingState,spendingImport);$('preview-summary').textContent=preview.added+' new · '+preview.revised+' revised · '+preview.unchanged+' unchanged spending records';$('preview-table').replaceChildren(tableHtml(preview.changes.slice(0,100),['Month / cash date','Saved','Imported'],r=>[r.date.slice(8)==='01'?monthLabel(r.date.slice(0,7),true):dateText(r.date),r.before===null?'New':money(r.before),money(r.after)]));$('revision-label').hidden=!preview.revised;$('allow-revisions').checked=false;$('import-preview').hidden=false;$('save-import').hidden=!(preview.added+preview.revised);$('preview-import').hidden=true;feedback(preview.added+preview.revised?'Review the changes, then save. Earlier months and cash corrections are preserved.':'Everything already matches. Spending is up to date.');}catch(e){feedback(e instanceof SyntaxError?'Paste valid spending JSON first.':e.message,true);}
+};
+$('save-import').onclick=async()=>{
+ if(activeTab!=='spending')return originalSave();if(!spendingImport)return;const preview=previewSpending(spendingState,spendingImport);if(preview.revised&&!$('allow-revisions').checked)return feedback('Allow revisions to update existing spending records.',true);
+ $('save-import').disabled=true;try{const res=await localRequest('spending',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...spendingImport,expectedRevision:spendingState.revision,allowRevisions:$('allow-revisions').checked})}),result=await res.json();if(!res.ok)throw new Error(result.error||'Could not save spending.');await loadSpending(true);$('import-dialog').close();toast('Saved spending: '+result.added+' new, '+result.revised+' revised.');}catch(e){feedback(e.message,true);}finally{$('save-import').disabled=false;}
+};
+$('export-spending').onclick=()=>{if(spendingState)download('spending-'+spendingState.asOf+'.json',JSON.stringify(spendingState,null,2),'application/json');};
+await loadSpending();
+
+let restoreCandidate=null,restoreExpected=null;
+async function exportFullBackup(){try{const data=await readLocalLedger();if(!data.history.points.length&&!data.spending.months.length)return toast('Add records or restore a backup first.');download('Worth_Backup_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({...data,exportedAt:new Date().toISOString()},null,2),'application/json');toast('Backup downloaded. Keep it in Files.');}catch(e){toast(e.message);}}
+function openBackupChooser(){$('restore-file').value='';$('restore-file').click();}
+for(const b of document.querySelectorAll('[data-open-backup]'))b.onclick=openBackupChooser;
+$('backup-dialog-export').onclick=exportFullBackup;
+$('start-manual').onclick=()=>{openImport();document.querySelector('[data-tab="manual"]').click();};
+$('restore-file').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{if(file.size>8000000)throw new Error('Choose a backup smaller than 8 MB.');restoreCandidate=normalizeBackup(JSON.parse(await file.text()));const state=await readLocalLedger(),preview=previewBackup(state,restoreCandidate);restoreExpected={history:state.history.revision,spending:state.spending.revision};
+ $('restore-summary').textContent=restoreCandidate.history.points.length+' daily snapshots and '+(restoreCandidate.spending?.months.length||0)+' spending months. '+(preview.history.added+preview.spending.added)+' new records; '+preview.revised+' revisions; '+(preview.history.unchanged+preview.spending.unchanged)+' unchanged.';
+ $('restore-revision-label').hidden=!preview.revised;$('restore-revisions').checked=false;$('restore-feedback').hidden=true;
+ if($('import-dialog').open)$('import-dialog').close();$('restore-dialog').showModal();
+ }catch(e){toast(e instanceof SyntaxError?'This file is not valid JSON.':e.message);}
+};
+$('restore-confirm').onclick=async()=>{
+ if(!restoreCandidate)return;$('restore-confirm').disabled=true;
+ try{await changeLocalLedger(old=>({data:restoreLocal(old,restoreCandidate,restoreExpected,$('restore-revisions').checked),result:{saved:true}}));await loadHistory();await loadSpending();$('restore-dialog').close();toast('Backup restored on this device. No records were uploaded.');}
+ catch(e){$('restore-feedback').textContent=e.message;$('restore-feedback').hidden=false;}
+ finally{$('restore-confirm').disabled=false;}
+};
+$('request-persistence').onclick=async()=>{try{const granted=await navigator.storage?.persist?.();$('persistence-status').textContent=granted?'Browser persistence granted. Keep an exported backup as well.':'Your browser decides retention automatically. Keep an exported backup in Files.';}catch{$('persistence-status').textContent='Persistence cannot be requested here. Keep an exported backup in Files.';}};
+</script></body></html>
