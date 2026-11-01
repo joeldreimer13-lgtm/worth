@@ -1,0 +1,6 @@
+.preview/
+.env*
+*Backup*.json
+*backup*.json
+private/
+node_modules/
