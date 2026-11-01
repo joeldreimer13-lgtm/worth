@@ -1,0 +1,10 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+const root=new URL('../',import.meta.url),read=p=>readFile(new URL(p,root),'utf8');
+const [core,spendCore,localCore,storage,client,spending,portability,css,html]=await Promise.all(['src/core.mjs','src/spending-core.mjs','src/local-core.mjs','src/storage.js','src/client.js','src/spending.js','src/portability.js','src/style.css','src/index.html'].map(read));
+const scripts=[core,spendCore,localCore,storage,client,spending,portability].map(s=>s.replace(/^import .*;\n/gm,'').replace(/^export /gm,'')).join('\n');
+const page=html.replace('/* APP_CSS */',()=>css).replace('/* APP_JS */',()=>scripts);
+if(/chatgpt\.site|\/api\/history|\/api\/spending|\/mcp|OAI-Sites|SPENDING_SEED/.test(page))throw new Error('Unexpected hosted dependency or private data in public output.');
+await mkdir(new URL('docs/',root),{recursive:true});await writeFile(new URL('docs/index.html',root),page);
+await writeFile(new URL('docs/.nojekyll',root),'');
+await writeFile(new URL('docs/icon.svg',root),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180"><rect width="180" height="180" rx="42" fill="#00a63c"/><path d="m38 119 36-35 24 14 42-48m-29 0h29v30" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+console.log('Built static, data-free GitHub Pages app.');
